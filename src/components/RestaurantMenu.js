@@ -2,25 +2,28 @@ import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { MENU_API } from "../utils/constants";
 import { useParams } from "react-router-dom";
+import useRestaurantMenu from "../utils/useRestaurantMenu";
 
 const RestaurantMenu = () => {
-  const [resInfo, setResInfo] = useState(null);
+  // const [resInfo, setResInfo] = useState(null);
 
   const {resId} = useParams();
 
-  useEffect(() => {
-    fetchMenu();
-  }, []);
+  const resInfo = useRestaurantMenu(resId);
 
-  const fetchMenu = async () => {
-    const data = await fetch(
-      MENU_API + resId
-    );
-    const json = await data.json();
+  // useEffect(() => {
+  //   fetchMenu();
+  // }, []);
 
-    console.log(json);
-    setResInfo(json.data);
-  };
+  // const fetchMenu = async () => {
+  //   const data = await fetch(
+  //     MENU_API + resId
+  //   );
+  //   const json = await data.json();
+
+  //   console.log(json);
+  //   setResInfo(json.data);
+  // };
 
   //destructuring initially resInfo is null so cant use name or cuisines and no ternary operator, use if condition
   //   const { name, cuisines, costForTwoMessage } =
