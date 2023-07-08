@@ -9,7 +9,7 @@ const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]); //reslist
 
   const [searchText, setSearchText] = useState("");
-
+  
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
 
   useEffect(() => {
@@ -20,9 +20,7 @@ const Body = () => {
     const data = await fetch(
       "https://www.swiggy.com/mapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
     );
-
     const json = await data.json();
-
     console.log(json);
     // optional chaining
     setListOfRestaurants(json?.data?.cards[2]?.data?.data?.cards);
@@ -39,23 +37,21 @@ const Body = () => {
     );
 
   // conditional rendering
-  // if(listOfRestaurants.length == 0){
-  //   return ( <Shimmer />)
-  // }
+  if(listOfRestaurants.length === 0) return ( <Shimmer />);
+  
 
-  return listOfRestaurants.length == 0 ? (
-    <Shimmer />
-  ) : (
+  return (
     <div className="body">
-      <div className="filter">
-        <div className="search">
+      <div className="filter flex m-4 p-4">
+        <div className="">
           <input
             type="text"
-            className="search-box"
+            placeholder="Search for restaurants and foods"
+            className="border border-solid border-black rounded-lg px-4 py-1 w-64"
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
           ></input>
-          <button
+          <button className="px-4 py-2 bg-green-100 m-4 rounded-lg"
             onClick={() => {
               // filter the restaurants card and update the ui
               // searchtext
@@ -70,20 +66,22 @@ const Body = () => {
             search
           </button>
         </div>
-        <button
-          className="filter-btn"
+       <div className=" flex items-center">
+       <button
+          className="px-4 py-2 bg-gray-100 rounded-lg"
           onClick={() => {
             const filteredList = listOfRestaurants.filter(
               (res) => res.data.avgRating > 4
             );
-            setListOfRestaurants(filteredList);
+            setFilteredRestaurant(filteredList);
             console.log(listOfRestaurants);
           }}
         >
           Top Rated Restaurants
         </button>
+       </div>
       </div>
-      <div className="res-container">
+      <div className="flex flex-wrap">
         {filteredRestaurant.map((restaurant) => (
           <Link
             key={restaurant.data.id}

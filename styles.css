@@ -1,53 +1,7 @@
-.header{
-    display: flex;
-    justify-content: space-between;
-    border: 1px solid black;
-}
-
-.logo{
-    width: 200px;
-}
-
-.nav-items > ul {
-    display: flex;
-    font-size: 24px;
-    list-style: none;
-}
-
-.nav-items >ul>li{
-    padding: 10px;
-    margin: 10px;
-}
-.nav-items{
-    padding-right: 90px;
-}
-.res-card{
-   
-    width: 185px;
-    padding: 5px;
-    margin: 5px;
-}
-.res-card:hover{
-    border: 1px solid black;
-    cursor: pointer;
-}
-.res-container{
-    margin: 5px;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.search{
-    padding: 10px;
-}
-.res-logo{
-    width: 100%;
-    
-}
-.filter-btn{
-    margin: 10px;
-    cursor: pointer;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+  
 .shimmer-container{
     display: flex;
     flex-wrap: wrap;
@@ -57,18 +11,4 @@
     height: 400px;
     background-color: #f0f0f0;
     margin: 10px;
-}
-
-.Login{
-    padding: 0 20px;
-    cursor: pointer;
-}
-
-.filter{
-    display: flex;
-}
-
-.user-card{
-    border: 1px solid black;
-    padding: 10px;
 }

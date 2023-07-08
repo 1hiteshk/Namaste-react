@@ -10,24 +10,20 @@ const Header = () => {
   const onlineStatus = useOnlineStatus();
 
   return (
-    <div className="header">
-      <div className="logo-container">
+    <div className="flex justify-between bg-[#f7ebb7] shadow-lg ">
+      <div className="w-28 ml-4">
         <img className="logo" src={LOGO_URL} />
       </div>
-      <div className="nav-items">
-        <ul>
-          <li>
-            Online status: {onlineStatus? "✅" :"🔴"}
-          </li>
-          <li><Link to="/home">Home</Link></li>
-          <li>
-            <Link to="/about">About Us</Link>
-          </li>
-          <li><Link to="/contact"> Contact Us</Link> </li>
-          <li><Link to="/grocery"> Grocery</Link> </li>
-          <li>Cart</li>
+      <div className="flex items-center">
+        <ul className="flex p-4 m-4">
+          <li className="px-4 font-bold text-[#0f334b] text-lg" ><Link to="/home">Home</Link></li>
+          <li className="px-4 font-bold text-[#0f334b] text-lg"><Link to="/about">About Us</Link></li>
+          <li className="px-4 font-bold text-[#0f334b] text-lg"><Link to="/contact"> Contact Us</Link> </li>
+          <li className="px-4 font-bold text-[#0f334b] text-lg"><Link to="/grocery"> Grocery</Link> </li>
+          <li className="px-4 font-bold text-[#0f334b] text-lg"><Link>🛒Cart</Link></li>
+          <li className="px-4 font-bold text-[#0f334b] text-lg"> Online status: {onlineStatus? "✅" :"🔴"}</li>
           <button
-            className="Login"
+            className="px-4 font-bold text-[#0f334b] text-lg"
             onClick={() => {
               btnNameReact == "Login"
                 ? setBtnNameReact("Logout")

@@ -7,20 +7,24 @@ const RestaurantCard = (props) => {
     const { resData } = props;
   // destructuring and optional chaining
     const {cloudinaryImageId, name,cuisines,avgRating,costForTwo,deliveryTime} = resData?.data;
+
     return (
-      <div className="res-card" style={styleCard}>
+      <div className="m-4 p-4 w-[250px] rounded-lg hover:bg-gray-400 bg-gray-50 hover:rounded-none hover:duration-500" >
         <img
-          className="res-logo"
+          className="rounded-lg hover:rounded-none hover:ease-in-out hover:duration-500"
           src={
             CDN_URL +
             resData.data.cloudinaryImageId
           }
         />
-        <h3>{name}</h3>
-        <h4>{cuisines.join(", ")}</h4>
-        <h4>{avgRating} stars</h4>
-        <h4>{costForTwo / 100} for two</h4>
-        <h4>{deliveryTime} minutes</h4>
+        <h3 className="font-bold py-2 text-lg">{name}</h3>
+        <h4 className="pb-1">{cuisines.join(", ")}</h4>
+        <h4 className="bg-[#48c479] text-white px-2 w-24 py-0">{avgRating} ⭐stars</h4>
+        <div className="flex">
+        <p className="text-md text-gray-700">•  {deliveryTime} minutes</p>
+        <p className="text-md text-gray-700 pl-4">•  ₹{costForTwo / 100} for two</p>
+        </div>
+        
       </div>
     );
   };
