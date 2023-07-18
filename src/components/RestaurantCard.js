@@ -29,4 +29,18 @@ const RestaurantCard = (props) => {
     );
   };
 
+  // High Order component ,returns a new component, a component is a fn. which return jsx
+  // input - RestaurantCard => RestaurantCardPromoted
+  // HOC is used to enhance a component
+  export const  withPromotedLabel = (RestaurantCard) => {
+    return (props) => {
+      return(
+        <div>
+          <label className="absolute bg-black text-white m-2 px-2 ml-4 rounded-sm">Promoted</label>
+          <RestaurantCard {...props} />
+        </div>
+      )
+    }
+  }
+
   export default RestaurantCard;
