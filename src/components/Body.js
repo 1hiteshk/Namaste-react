@@ -9,11 +9,13 @@ import UserContext from "../utils/UserContext";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]); //reslist
-
   const [searchText, setSearchText] = useState("");
-
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
-
+  const [coords, setCoords] = useState({ lat: 12.971599, lng: 77.594566})
+  console.log(coords)
+  const [state, setState] = useState({ age: 19, siblingsNum: 4 })
+  // const { age, siblingsNum } = state;
+  console.log(state);
   const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
 
   useEffect(() => {
@@ -22,7 +24,7 @@ const Body = () => {
 
   const fetchData = async () => {
     const data = await fetch(
-      "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.971599&lng=77.594566&page_type=DESKTOP_WEB_LISTING"
+      `https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=${coords.lat}&lng=77.594566&page_type=DESKTOP_WEB_LISTING`
     );
     const json = await data.json();
     // console.log(json);
