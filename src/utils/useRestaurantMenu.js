@@ -1,22 +1,23 @@
 import { useEffect, useState } from "react";
-import { MENU_API } from "./constants";
+import constants from "./constants";
 
 const useRestaurantMenu = (resId) => {
 
-    const [resInfo, setResInfo] = useState(null);
-    // fetchdata
-    useEffect(() =>{
-      fetchData();
-    },[])
+  const DATA_LINKS = constants();
+  const FETCH_SWIGGY_MENU_API = DATA_LINKS.SWIGGY_MENU_API
 
-    const fetchData = async() => {
-        const data = await fetch(MENU_API + resId);
+  const [resInfo, setResInfo] = useState(null);
+  // fetchdata
+  useEffect(() =>{
+    fetchData();
+  },[])
 
-        const json = await data.json();
-        setResInfo(json.data); 
-    }
-
-    return resInfo;
+  const fetchData = async() => {
+      const data = await fetch(FETCH_SWIGGY_MENU_API + resId);
+      const json = await data.json();
+      setResInfo(json.data); 
+  }
+  return resInfo;
 }
 
 export default useRestaurantMenu;

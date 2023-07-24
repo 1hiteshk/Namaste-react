@@ -6,25 +6,29 @@ import { Link } from "react-router-dom";
 import Shimmer from "./Shimmer";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
+import constants from "../utils/constants";
+import { SWIGGY_API } from "../utils/constants";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]); //reslist
   const [searchText, setSearchText] = useState("");
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
-  const [coords, setCoords] = useState({ lat: 12.971599, lng: 77.594566})
-  console.log(coords)
-  const [state, setState] = useState({ age: 19, siblingsNum: 4 })
-  // const { age, siblingsNum } = state;
-  console.log(state);
+  const { loggedInUser ,setUserName} = useContext(UserContext);
+  
+  const DATA_LINKS = constants();
+  const FETCH_SWIGGY_API = DATA_LINKS.SWIGGY_API;
+  // console.log(DATA_LINKS.SWIGGY_API, "data_link")
+
   const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [FETCH_SWIGGY_API]);
 
   const fetchData = async () => {
+    // console.log(SWIGGY_API, "2")
     const data = await fetch(
-      `https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=${coords.lat}&lng=77.594566&page_type=DESKTOP_WEB_LISTING`
+      FETCH_SWIGGY_API
     );
     const json = await data.json();
     // console.log(json);
@@ -36,13 +40,8 @@ const Body = () => {
   const onlineStatus = useOnlineStatus();
 
   if (onlineStatus == false)
-    return (
-      <h1>
-        Looks like you are offline!! please check your internet connection.
-      </h1>
+    return ( <h1> Looks like you are offline!! please check your internet connection.</h1>
     );
-
-    const { loggedInUser ,setUserName} = useContext(UserContext);
 
   // conditional rendering
   if (listOfRestaurants.length === 0) return <Shimmer />;

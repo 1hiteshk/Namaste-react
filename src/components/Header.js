@@ -18,7 +18,7 @@ const Header = () => {
       </div>
       <div className="flex items-center">
         <ul className="flex p-4 m-4">
-          <li className="px-4 font-bold text-[#0f334b] text-lg" ><Link to="/home">Home</Link></li>
+          <li className="px-4 font-bold text-[#0f334b] text-lg" ><Link to="/">Home</Link></li>
           <li className="px-4 font-bold text-[#0f334b] text-lg"><Link to="/about">About Us</Link></li>
           <li className="px-4 font-bold text-[#0f334b] text-lg"><Link to="/contact"> Contact Us</Link> </li>
           <li className="px-4 font-bold text-[#0f334b] text-lg"><Link to="/grocery"> Grocery</Link> </li>

@@ -1,4 +1,4 @@
-import { CDN_URL } from "../utils/constants";
+import { IMG_CDN_URL } from "../utils/constants";
 
 const ItemList = ({items}) => {
     // console.log(items);
@@ -18,7 +18,7 @@ const ItemList = ({items}) => {
                       <div className="absolute">
                         <button className="bg-white rounded w-28 h-8 mx-2 my-20 border font-semibold text-green-500">ADD +</button>
                       </div>
-                    <img className="w-32 h-24 rounded" src={CDN_URL + item.card.info.imageId} />
+                    <img className="w-32 h-24 rounded" src={IMG_CDN_URL + item.card.info.imageId} />
                     </div>
                 </div>
                 ))}
