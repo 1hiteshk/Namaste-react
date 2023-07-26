@@ -1,10 +1,10 @@
 import { useDispatch } from "react-redux";
 import { IMG_CDN_URL } from "../utils/constants";
-import { removeItem } from "../utils/cartSlice";
+import { decrQuantity, incrQuantity, removeItem } from "../utils/cartSlice";
 
 const FoodItemCart = ({item}) => {
     console.log(item)
-    const { name,description,category,imageId,price,defaultPrice} =  item.card.info ;
+    const { name,description,category,imageId,price,defaultPrice} =  item ;
     const dispatch = useDispatch();
     const handleRemoveItem = (item) => {
         dispatch(removeItem(item))
@@ -12,7 +12,7 @@ const FoodItemCart = ({item}) => {
     }
   return (
     <div className="">
-      <div className="p-2 m-2 border-b-2 text-left flex justify-between" key={item.card.info.id}>
+      <div className="p-2 m-2 border-b-2 text-left flex justify-between" key={item.id}>
                     <div className="w-9/12">
                     <div className="py-2">
                         <span className="font-semibold">{name}</span>
@@ -30,6 +30,11 @@ const FoodItemCart = ({item}) => {
                         </button>
                       </div>
                     <img className="w-32 h-24 rounded" src={IMG_CDN_URL + imageId} />
+                    </div>
+                    <div className="border flex flex-col justify-between">
+                      <button className="bg-gray-400" onClick={() => item?.quantity >= 2 ? dispatch(decrQuantity(item)) :  handleRemoveItem(item)}>-</button>
+                      <button onClick={console.log(item, "foodq")} >{item.quantity}.......</button>
+                      <button className="bg-gray-400" onClick={() => dispatch(incrQuantity(item))}>+</button>
                     </div>
                 </div>
      

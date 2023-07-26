@@ -8,7 +8,17 @@ const ItemList = ({items}) => {
 
   const handleAddItem = (item) => {
     // dispatch an action
-    dispatch(addItem(item))
+    console.log(item, "itemlist dispatch")
+    dispatch(addItem({
+      name: item.card.info.name,
+      price: item.card.info?.price ,
+      imageId: item.card?.info?.imageId,
+      quantity: item.card.info.inStock,
+      id: item.card.info?.id,
+      description: item?.card?.info?.description,
+
+
+    }))
   }
     // console.log(items);
     return(

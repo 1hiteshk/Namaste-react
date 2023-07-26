@@ -7,13 +7,26 @@ const cartSlice = createSlice({
     },
     reducers: {
         addItem: (state, action) => {
-            state.items.push(action.payload);
+            if(state.items.find((item) => item.id === action.payload.id)){
+                state.items = state.items.map((item) => item.id === action.payload.id ? {...item, quantity: item.quantity + 1} : item ) 
+            }
+            else{
+            //  state.items.push(action.payload);
+            state.items = [...state.items, action.payload];
+            }
         },
+        incrQuantity: (state, action) => {
+            state.items = state.items.map((item) => (item.id === action.payload.id) ? { ...item, quantity: item.quantity + 1 } : item)
+        },
+        decrQuantity: (state, action) => {
+            state.items = state.items.map((item) => (item.id === action.payload.id) ? { ...item, quantity: item.quantity - 1 } : item)
+        }
+        ,
         removeItem: (state,action) => {
             state.items.map((item) => {
-                if(item.card.info.id === action.payload.card.info.id){
+                if(item.id === action.payload.id){
                     const updatedItems = state.items.filter(
-                        (itm) => itm.card.info.id !== item.card.info.id
+                        (itm) => itm.id !== item.id
                     );
 
                     state.items = updatedItems;
@@ -29,6 +42,6 @@ const cartSlice = createSlice({
     },
 })
 
-export const {addItem, removeItem, clearCart} = cartSlice.actions;
+export const {addItem, removeItem, clearCart,incrQuantity, decrQuantity} = cartSlice.actions;
 
 export default cartSlice.reducer;

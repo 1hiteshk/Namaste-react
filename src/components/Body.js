@@ -26,15 +26,19 @@ const Body = () => {
   }, [FETCH_SWIGGY_API]);
 
   const fetchData = async () => {
-    // console.log(SWIGGY_API, "2")
+    console.log(FETCH_SWIGGY_API, "2")
     const data = await fetch(
       FETCH_SWIGGY_API
     );
     const json = await data.json();
-    // console.log(json);
+    console.log(json, "data aaya");
     // optional chaining
-    setListOfRestaurants(json?.data?.cards[2]?.data?.data?.cards);
-    setFilteredRestaurant(json?.data?.cards[2]?.data?.data?.cards);
+    setListOfRestaurants(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    console.log(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants, "rest. aaye")
+    setFilteredRestaurant(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    console.log(filteredRestaurant);
+    // setListOfRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+    // setFilteredRestaurant(json?.data?.cards[2]?.data?.data?.cards);
   };
 
   const onlineStatus = useOnlineStatus();
@@ -44,7 +48,7 @@ const Body = () => {
     );
 
   // conditional rendering
-  if (listOfRestaurants.length === 0) return <Shimmer />;
+  if (listOfRestaurants?.length === 0) return <Shimmer />;
 
   return (
     <div className="body">
@@ -67,7 +71,7 @@ const Body = () => {
               // searchtext
 
               const filteredRestaurant = listOfRestaurants.filter((res) =>
-                res.data.name.toLowerCase().includes(searchText.toLowerCase()) || res.data.cuisines.join(", ").toLowerCase().includes(searchText.toLowerCase())
+                res.info.name.toLowerCase().includes(searchText.toLowerCase()) || res.info.cuisines.join(", ").toLowerCase().includes(searchText.toLowerCase())
               );
 
               setFilteredRestaurant(filteredRestaurant);
@@ -81,7 +85,7 @@ const Body = () => {
             className="px-4 py-2 bg-gray-100 rounded-lg"
             onClick={() => {
               const filteredList = listOfRestaurants.filter(
-                (res) => res.data.avgRating > 4
+                (res) => res.info.avgRating > 4
               );
               setFilteredRestaurant(filteredList);
               console.log(listOfRestaurants);
@@ -93,13 +97,13 @@ const Body = () => {
         <div className="bg-gray-100 ml-4 px-4 h-10 mt-4 py-2 rounded-md"><span>you searched : {loggedInUser}</span></div>
       </div>
       <div className="flex flex-wrap">
-        {filteredRestaurant.map((restaurant) => (
+        {listOfRestaurants.map((restaurant) => (
           <Link
-            key={restaurant.data.id}
-            to={"/restaurants/" + restaurant.data.id}
+            key={restaurant.info.id}
+            to={"/restaurants/" + restaurant.info.id}
           >
             {/* if the restaurant is promoted then add a promoted label to it */}
-            {restaurant.data.promoted ? (
+            {restaurant.info.promoted ? (
               <RestaurantCardPromoted resData={restaurant} />
             ) : (
               <RestaurantCard resData={restaurant} />
